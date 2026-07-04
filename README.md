@@ -1,6 +1,6 @@
 - 👋 Hi, I’m @sjamal
 - 👀 I’m interested in R, python, bash
-- 🌱 I’m currently learning selenium
+- 🌱 I’m currently learning MCP and agentic workflows
 - 💞️ I’m looking to collaborate on workflow automation projects
 - 📫 Tag me or send a pull request
 
