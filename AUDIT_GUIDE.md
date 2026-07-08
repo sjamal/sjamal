@@ -13,22 +13,22 @@ Scan files for common variable patterns used to hold API keys, tokens, passwords
 
 *   **Universal Profile / General Scan:**
     ```bash
-    grep -rnEi "api_key|token|secret|password|passwd|auth|bearer|private_key" .
+    grep -rnEi "api_key|token|secret|password|passwd|auth|bearer|private_key" --exclude-dir={.venv,lib,site-packages,python3.14,.git} .
     ```
 
 *   **Python Applications (`.py`, `.json`, `.env`):**
     ```bash
-    grep -rnEi "api_key|token|secret|password|passwd|auth|bearer|private_key|client_id|client_secret" --include="*.py" --include="*.json" --include="*.env" .
+    grep -rnEi "api_key|token|secret|password|passwd|auth|bearer|private_key|client_id|client_secret" --include="*.py" --include="*.json" --include="*.env" --exclude-dir={.venv,lib,site-packages,python3.14} .
     ```
 
 *   **Selenium Browser Automation:**
     ```bash
-    grep -rnEi "username|user_name|login|email|password|passwd|secret|key|token|cookie|session" --include="*.py" .
+    grep -rnEi "username|user_name|login|email|password|passwd|secret|key|token|cookie|session" --include="*.py" --exclude-dir={.venv,lib,site-packages} .
     ```
 
 *   **R Analysis Scripts & Notebooks (`.R`, `.Rmd`):**
     ```bash
-    grep -rnEi "api_key|token|secret|password|passwd|auth|username|user_name" --include="*.R" --include="*.Rmd" .
+    grep -rnEi "api_key|token|secret|password|passwd|auth|username|user_name" --include="*.R" --include="*.Rmd" --exclude-dir={.venv,lib,site-packages} .
     ```
 
 *   **Ansible Infrastructure Playbooks (`.yml`, `.yaml`, `.cfg`):**
@@ -39,13 +39,13 @@ Scan files for common variable patterns used to hold API keys, tokens, passwords
 ### 2. Environment & Path Scans
 Ensure that personal local system directories (which expose local machine usernames) are not explicitly hardcoded.
 ```bash
-grep -rn "/Users/" . || grep -rn "/home/" .
+grep -rn "/Users/" --exclude-dir={.venv,lib,site-packages} . || grep -rn "/home/" --exclude-dir={.venv,lib,site-packages} .
 ```
 
 ### 3. Infrastructure & Network Leaks
 Verify that no live production or internal home lab IPv4 addresses are leaked in setup scripts or inventories.
 ```bash
-grep -rnE "([0-9]{1,3}\.){3}[0-9]{1,3}" .
+grep -rnE "([0-9]{1,3}\.){3}[0-9]{1,3}" --exclude-dir={.venv,lib,site-packages,.git} .
 ```
 
 ---
